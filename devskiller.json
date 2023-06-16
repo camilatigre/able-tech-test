@@ -1,0 +1,12 @@
+{
+  "readOnlyFiles": ["README.md"],
+  "hiddenFiles": [
+    "backend-ablefy/node_modules",
+    "frontend-typeahead/node_modules"
+  ],
+  "verification": {
+    "testNamePatterns": [".*verify_pack.*"],
+    "pathPatterns": ["**verify_pack**"]
+  },
+  "candidateTestsIncludedInScoring": true
+}

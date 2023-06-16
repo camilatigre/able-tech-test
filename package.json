@@ -1,0 +1,16 @@
+{
+  "name": "devskiller-songs-and-movies-exercises",
+  "version": "1.0.0",
+  "description": "This repository contains two different projects that are not related to each other. You must need to complete the tasks from the two projects.",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "concurrently \"cd backend-ablefy && npm install\" \"cd frontend-typeahead && npm install\"",
+    "test:backend": "cd backend-ablefy && npm test",
+    "test:frontend": "cd frontend-typeahead && CI=true npm test",
+    "test": "concurrently \"npm run test:backend\" \"npm run test:frontend\" && cd ."
+  },
+  "dependencies": {
+    "concurrently": "^6.3.0"
+  },
+  "author": "Able (https://able.co)"
+}
