@@ -34,7 +34,7 @@ export default function TypeaheadInput() {
         isSearching: false
     }));
   }
-  
+
 
   useEffect(() => {
     let timerId;
@@ -77,7 +77,7 @@ export default function TypeaheadInput() {
   return (
     <div className="flex flex-col justify-center items-center">
       <input
-        className="text-lg text-primary border-primary border rounded-md w-48 focus:w-96 transition-all focus:outline-none p-1 mb-2"
+        className="text-lg text-primary border-primary border rounded-md w-48 focus:w-96 transition-all focus:outline-none p-1 mb-2 focus:border-blue-500"
         placeholder="Search"
         type="text"
         onChange={handleSearch}
