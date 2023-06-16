@@ -6,7 +6,7 @@ afterAll(async () => {
   await prisma.$disconnect();
 });
 
-describe.skip("Test Endpoints", () => {
+describe("Test Endpoints", () => {
   it("should get all songs paginated by a default size 10", async () => {
     const res = await request(app).get("/api/songs");
     expect(res.statusCode).toEqual(200);

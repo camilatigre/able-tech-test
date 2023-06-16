@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 
 services:
   backend:
@@ -18,7 +18,7 @@ services:
     networks:
       - app-network
     command: >
-      sh -c "npx prisma migrate dev
+      sh -c "npx prisma migrate dev --schema=./prisma/schema.prisma
       && npm start"
   postgres:
     image: postgres
@@ -26,8 +26,8 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-    ports:
-      - '5432:5432'
+    # ports:
+    #   - '5432:5432'
     volumes:
       - db:/var/lib/postgresql/data
     ports:
@@ -36,8 +36,8 @@ services:
       - app-network
 
 networks:
-    app-network:
-        driver: bridge
+  app-network:
+    driver: bridge
 volumes:
   db:
     driver: local

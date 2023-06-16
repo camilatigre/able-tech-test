@@ -1,13 +1,11 @@
-const prisma = require("../../prisma");
+const SongService = require('../services/song.services')
 
 exports.findAll = (req, res) => {
   const title = req.query.title;
-  const condition = title
-    ? { where: { title: { contains: title, mode: "insensitive" } } }
-    : {};
+  const page = parseInt(req.query.page) || 1;
+  const size = parseInt(req.query.size) || 10;
 
-  prisma.song
-    .findMany(condition)
+  SongService.findAll(title, page, size)
     .then((data) => {
       res.send({ data });
     })
@@ -21,10 +19,7 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
-  prisma.song
-    .findUnique({
-      where: { id: Number(id) },
-    })
+  SongService.findOne(id)
     .then((data) => {
       if (!data)
         res.status(404).send({ message: "Not found Song with id " + id });
@@ -36,8 +31,7 @@ exports.findOne = (req, res) => {
 };
 
 exports.getTopTen = (req, res) => {
-  prisma.song
-    .findMany()
+  SongService.getTopTen()
     .then((data) => {
       res.send({ data });
     })
