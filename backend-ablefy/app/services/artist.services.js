@@ -26,25 +26,36 @@ const ArtistService = {
   },
   getTopThree: async () => {
     try {
-      const data = await prisma.artist.findMany({
+      const artists = await prisma.artist.findMany({
         take: 3,
-        where: { id },
         include: {
-            songs: true,
-        }
+          songs: {
+            select: {
+              playbacks: true,
+            },
+          },
+        },
       });
 
-      console.log({
-        id: data.id,
-        name: data.name,
-        totalPlaybacks: 0
-      })
+      const artistsWithTotalPlaybacks = artists.map((artist) => {
+        const totalPlaybacks = artist.songs.reduce(
+          (sum, song) => sum + song.playbacks,
+          0
+        );
 
-      console.log(data.songs)
-      
-      return data;
+        return {
+          id: artist.id,
+          name: artist.name,
+          totalPlaybacks,
+        };
+      });
+
+      const sortedArtists = artistsWithTotalPlaybacks.sort(
+        (a, b) => b.totalPlaybacks - a.totalPlaybacks
+      );
+
+      return sortedArtists;
     } catch (error) {
-        console.log('error', error)
       throw new Error("Some error occurred while retrieving artists.");
     }
   },
